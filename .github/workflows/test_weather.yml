@@ -1,0 +1,23 @@
+name: Test Weather API
+
+on:
+  workflow_dispatch:   # 수동 실행 전용 (테스트용)
+
+jobs:
+  fetch-weather:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run weather fetch
+        run: python fetch_weather.py
+
+      - name: Show result JSON
+        run: cat weather_result.json
