@@ -1,0 +1,26 @@
+name: Test Stock API
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fetch-stock:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install yfinance
+
+      - name: Run stock fetch
+        run: python fetch_stock.py
+
+      - name: Show result JSON
+        run: cat stock_result.json
