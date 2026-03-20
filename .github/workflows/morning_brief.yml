@@ -2,8 +2,13 @@ name: Morning Brief
 
 on:
   schedule:
-    - cron: "0 22 * * *"   # 매일 오전 7시 KST (UTC+9 기준 전날 22:00 UTC)
-  workflow_dispatch:         # 수동 실행도 가능
+    - cron: "0 22 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   run-brief:
@@ -26,9 +31,16 @@ jobs:
           NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
         run: python morning_brief.py
 
-      - name: Upload brief JSON
-        uses: actions/upload-artifact@v4
-        with:
-          name: brief-result
-          path: brief_result.json
-          retention-days: 7
+      - name: Create docs folder
+        run: mkdir -p docs
+
+      - name: Generate HTML
+        run: python generate_html.py
+
+      - name: Commit and push HTML
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/index.html
+          git commit -m "자동 브리핑 업데이트: $(date '+%Y-%m-%d %H:%M')" || echo "변경 없음"
+          git push
