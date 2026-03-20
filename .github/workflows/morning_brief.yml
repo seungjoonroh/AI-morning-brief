@@ -1,0 +1,34 @@
+name: Morning Brief
+
+on:
+  schedule:
+    - cron: "0 22 * * *"   # 매일 오전 7시 KST (UTC+9 기준 전날 22:00 UTC)
+  workflow_dispatch:         # 수동 실행도 가능
+
+jobs:
+  run-brief:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install yfinance
+
+      - name: Run morning brief
+        env:
+          NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+        run: python morning_brief.py
+
+      - name: Upload brief JSON
+        uses: actions/upload-artifact@v4
+        with:
+          name: brief-result
+          path: brief_result.json
+          retention-days: 7
