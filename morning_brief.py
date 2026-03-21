@@ -79,7 +79,7 @@ def fetch_news_by_keyword(keyword_config, page_size=15):
         label = keyword_config
         query = keyword_config
 
-    yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+    yesterday = (datetime.now() - timedelta(days=2)).strftime("%Y-%m-%d")
     params = urllib.parse.urlencode({
         "q": query, "from": yesterday,
         "sortBy": "relevancy", "language": "ko",
