@@ -345,4 +345,4 @@ if __name__ == "__main__":
     html  = generate_html(brief)
     with open("docs/index.html", "w", encoding="utf-8") as f:
         f.write(html)
-    print("docs/index.html 생성 완료")h
+    print("docs/index.html 생성 완료")
