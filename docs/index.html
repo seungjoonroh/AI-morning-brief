@@ -13,8 +13,6 @@
       padding: 24px 16px;
     }
     .container { max-width: 720px; margin: 0 auto; }
-
-    /* 헤더 */
     .header {
       background: linear-gradient(135deg, #1a202c, #2d3748);
       color: white;
@@ -24,8 +22,6 @@
     }
     .header h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
     .header .subtitle { font-size: 0.85rem; color: #a0aec0; }
-
-    /* 카드 공통 */
     .card {
       background: white;
       border-radius: 16px;
@@ -41,8 +37,6 @@
       letter-spacing: 0.08em;
       margin-bottom: 14px;
     }
-
-    /* 날씨 */
     .weather-main {
       display: flex;
       align-items: center;
@@ -59,23 +53,29 @@
       color: #718096;
       flex-wrap: wrap;
     }
-
-    /* 주가 */
     table { width: 100%; border-collapse: collapse; }
     td { padding: 8px 4px; font-size: 0.9rem; }
     tr:not(:last-child) td { border-bottom: 1px solid #f0f0f0; }
     .stock-label { color: #2d3748; font-weight: 500; width: 30%; }
     .stock-price { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
     .stock-change { text-align: right; font-variant-numeric: tabular-nums; font-size: 0.85rem; }
-
-    /* 뉴스 */
-    .news-block { margin-bottom: 20px; }
+    .news-block { margin-bottom: 24px; }
     .news-block:last-child { margin-bottom: 0; }
     .news-block h3 {
       font-size: 0.85rem;
       font-weight: 700;
       color: #4a5568;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+    }
+    .summary {
+      background: #f0f4ff;
+      border-left: 3px solid #4a6fa5;
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      font-size: 0.88rem;
+      color: #2d3748;
+      line-height: 1.6;
+      margin-bottom: 12px;
     }
     .news-block ul { list-style: none; }
     .news-block li {
@@ -93,8 +93,6 @@
     }
     .news-block a:hover { color: #3182ce; }
     .news-meta { font-size: 0.75rem; color: #a0aec0; }
-
-    /* 푸터 */
     .footer {
       text-align: center;
       font-size: 0.75rem;
@@ -105,167 +103,94 @@
 </head>
 <body>
   <div class="container">
-
     <div class="header">
       <h1>📰 AI 모닝 브리핑</h1>
-      <div class="subtitle">2026-03-20 23:58 기준</div>
+      <div class="subtitle">2026-03-21 00:29 기준</div>
     </div>
 
-    <!-- 날씨 -->
     <div class="card">
       <h2>🌤 날씨 — 서울</h2>
       <div class="weather-main">
-        <div class="weather-emoji">🌤️</div>
+        <div class="weather-emoji">☀️</div>
         <div>
-          <div class="weather-temp">-0.0°C</div>
-          <div class="weather-condition">구름 조금</div>
+          <div class="weather-temp">1.0°C</div>
+          <div class="weather-condition">맑음</div>
         </div>
       </div>
       <div class="weather-detail">
-        <span>💧 습도 94%</span>
-        <span>💨 바람 2.6 km/h</span>
+        <span>💧 습도 89%</span>
+        <span>💨 바람 2.3 km/h</span>
         <span>🌡 최고 12.0°C / 최저 -1.6°C</span>
         <span>☔ 강수 0.0 mm</span>
       </div>
     </div>
 
-    <!-- 주가 -->
     <div class="card">
       <h2>📈 주가</h2>
       <table>
             <tr>
               <td class="stock-label">코스피</td>
               <td class="stock-price">5,781.20</td>
-              <td style="color:#e53e3e" class="stock-change">
-                ▲ +17.98
-              </td>
-              <td style="color:#e53e3e" class="stock-change">
-                (+0.31%)
-              </td>
+              <td style="color:#e53e3e" class="stock-change">▲ +17.98</td>
+              <td style="color:#e53e3e" class="stock-change">(+0.31%)</td>
             </tr>
             <tr>
               <td class="stock-label">코스닥</td>
               <td class="stock-price">1,161.52</td>
-              <td style="color:#e53e3e" class="stock-change">
-                ▲ +18.04
-              </td>
-              <td style="color:#e53e3e" class="stock-change">
-                (+1.58%)
-              </td>
+              <td style="color:#e53e3e" class="stock-change">▲ +18.04</td>
+              <td style="color:#e53e3e" class="stock-change">(+1.58%)</td>
             </tr>
             <tr>
               <td class="stock-label">삼성전자</td>
               <td class="stock-price">199,400.00</td>
-              <td style="color:#3182ce" class="stock-change">
-                ▼ -1100.0
-              </td>
-              <td style="color:#3182ce" class="stock-change">
-                (-0.55%)
-              </td>
+              <td style="color:#3182ce" class="stock-change">▼ -1100.0</td>
+              <td style="color:#3182ce" class="stock-change">(-0.55%)</td>
             </tr>
             <tr>
               <td class="stock-label">S&P 500</td>
               <td class="stock-price">6,506.48</td>
-              <td style="color:#3182ce" class="stock-change">
-                ▼ -100.01
-              </td>
-              <td style="color:#3182ce" class="stock-change">
-                (-1.51%)
-              </td>
+              <td style="color:#3182ce" class="stock-change">▼ -100.01</td>
+              <td style="color:#3182ce" class="stock-change">(-1.51%)</td>
             </tr>
             <tr>
               <td class="stock-label">나스닥</td>
               <td class="stock-price">21,647.61</td>
-              <td style="color:#3182ce" class="stock-change">
-                ▼ -443.08
-              </td>
-              <td style="color:#3182ce" class="stock-change">
-                (-2.01%)
-              </td>
+              <td style="color:#3182ce" class="stock-change">▼ -443.08</td>
+              <td style="color:#3182ce" class="stock-change">(-2.01%)</td>
             </tr>
             <tr>
               <td class="stock-label">달러/원</td>
               <td class="stock-price">1,504.83</td>
-              <td style="color:#3182ce" class="stock-change">
-                ▼ -0.42
-              </td>
-              <td style="color:#3182ce" class="stock-change">
-                (-0.03%)
-              </td>
+              <td style="color:#3182ce" class="stock-change">▼ -0.42</td>
+              <td style="color:#3182ce" class="stock-change">(-0.03%)</td>
             </tr></table>
     </div>
 
-    <!-- 뉴스 -->
     <div class="card">
       <h2>📋 뉴스 클리핑</h2>
       
         <div class="news-block">
           <h3># AI</h3>
+          <div class="summary">요약 실패: HTTP Error 400: Bad Request</div>
           <ul>
             <li>
-              <a href="https://www.venturesquare.net/1060031/" target="_blank">KOSA·KT, AI 역량 검증 체계 구축 업무협약 체결</a>
-              <span class="news-meta">Venturesquare.net · 2026-03-19</span>
+              <a href="https://zdnet.co.kr/view/?no=20260320085604" target="_blank">신세계면세점, LG전자와 AI 물류 시스템 구축</a>
+              <span class="news-meta">Zdnet.co.kr · 2026-03-20</span>
             </li>
             <li>
-              <a href="https://www.venturesquare.net/1059522/" target="_blank">버즈니, ‘AI 바우처 지원사업’ 2년 연속 선정</a>
-              <span class="news-meta">Venturesquare.net · 2026-03-19</span>
-            </li>
-            <li>
-              <a href="https://www.khan.co.kr/article/202603191657001" target="_blank">“AI, 노동 대체 아닌 협업 도구로”…노벨경제학 수상자의 ‘친노동자 AI’ 제안</a>
-              <span class="news-meta">Khan.co.kr · 2026-03-19</span>
-            </li>
-            <li>
-              <a href="https://zdnet.co.kr/view/?no=20260319223547" target="_blank">[기고] AI 전쟁 시대, 합참 'AI 작전지원단' 지금 창설해야</a>
-              <span class="news-meta">Zdnet.co.kr · 2026-03-19</span>
-            </li>
-            <li>
-              <a href="https://zdnet.co.kr/view/?no=20260319162023" target="_blank">韓 AI 3사 총집결…오케스트로, 공공 AI 인프라 판 키운다</a>
-              <span class="news-meta">Zdnet.co.kr · 2026-03-19</span>
+              <a href="https://zdnet.co.kr/view/?no=20260320091225" target="_blank">알리바바 "5년 내 AI 관련 매출 150조원으로 확대할 것"</a>
+              <span class="news-meta">Zdnet.co.kr · 2026-03-20</span>
             </li></ul>
         </div>
         <div class="news-block">
           <h3># 반도체</h3>
-          <ul>
-            <li>
-              <a href="https://www.venturesquare.net/1059503/" target="_blank">심플랫폼, DB하이텍과 협력 확대…반도체 공정 AI 적용 범위 확장</a>
-              <span class="news-meta">Venturesquare.net · 2026-03-19</span>
-            </li>
-            <li>
-              <a href="https://zdnet.co.kr/view/?no=20260319105728" target="_blank">차세대 AI반도체, 양성자가속기로 가혹한 우주환경 실험해보니</a>
-              <span class="news-meta">Zdnet.co.kr · 2026-03-19</span>
-            </li>
-            <li>
-              <a href="https://www.khan.co.kr/article/202603191346001" target="_blank">K팝 선방했지만…작년 지식서비스 무역적자 12년 만에 ‘최대’</a>
-              <span class="news-meta">Khan.co.kr · 2026-03-19</span>
-            </li>
-            <li>
-              <a href="https://www.khan.co.kr/article/202603191630001" target="_blank">리사 수 방한에서 확인된 AMD의 ‘탈엔비디아’ 셈법은</a>
-              <span class="news-meta">Khan.co.kr · 2026-03-19</span>
-            </li>
-            <li>
-              <a href="https://zdnet.co.kr/view/?no=20260319164800" target="_blank">삼성전자, 올해 시설·R&D 투자에 110조원 이상 투입..."AI 주도권 확보"</a>
-              <span class="news-meta">Zdnet.co.kr · 2026-03-19</span>
-            </li></ul>
+          <div class="summary">관련 기사가 없습니다.</div>
+          <ul><li style='color:#718096'>관련 기사 없음</li></ul>
         </div>
         <div class="news-block">
           <h3># 코스피</h3>
-          <ul>
-            <li>
-              <a href="https://www.khan.co.kr/article/202603190902001" target="_blank">[속보]환율 21.9원 급등한 1505원 개장</a>
-              <span class="news-meta">Khan.co.kr · 2026-03-19</span>
-            </li>
-            <li>
-              <a href="https://zdnet.co.kr/view/?no=20260319102148" target="_blank">하나자산운용, 2026년 투자전략 오프라인 세미나 개최</a>
-              <span class="news-meta">Zdnet.co.kr · 2026-03-19</span>
-            </li>
-            <li>
-              <a href="https://zdnet.co.kr/view/?no=20260320083225" target="_blank">소비주 살 때 왔다…BoA "지금이 기회"</a>
-              <span class="news-meta">Zdnet.co.kr · 2026-03-19</span>
-            </li>
-            <li>
-              <a href="https://www.khan.co.kr/article/202603192027005" target="_blank">고유가·연준 ‘매파’ 신호…당국 구두개입 언급에도 ‘원화 약세’</a>
-              <span class="news-meta">Khan.co.kr · 2026-03-19</span>
-            </li></ul>
+          <div class="summary">관련 기사가 없습니다.</div>
+          <ul><li style='color:#718096'>관련 기사 없음</li></ul>
         </div>
     </div>
 
