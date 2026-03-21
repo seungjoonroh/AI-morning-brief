@@ -1,46 +1,46 @@
 import json
 from datetime import datetime
 
-def load_brief(path=“brief_result.json”):
-with open(path, encoding=“utf-8”) as f:
+def load_brief(path="brief_result.json"):
+with open(path, encoding="utf-8") as f:
 return json.load(f)
 
 def stock_color(change):
-if change > 0:  return “#e53e3e”
-if change < 0:  return “#3182ce”
-return “#718096”
+if change > 0:  return "#e53e3e"
+if change < 0:  return "#3182ce"
+return "#718096"
 
 def stock_arrow(change):
-if change > 0:  return “▲”
-if change < 0:  return “▼”
-return “—”
+if change > 0:  return "▲"
+if change < 0:  return "▼"
+return "—"
 
 def weather_emoji(condition):
 table = {
-“맑음”: “☀️”, “구름 조금”: “🌤️”, “구름 많음”: “⛅”,
-“흐림”: “☁️”, “비”: “🌧️”, “눈”: “❄️”,
-“소나기”: “🌦️”, “천둥번개”: “⛈️”,
+"맑음": "☀️", "구름 조금": "🌤️", "구름 많음": "⛅",
+"흐림": "☁️", "비": "🌧️", "눈": "❄️",
+"소나기": "🌦️", "천둥번개": "⛈️",
 }
-return table.get(condition, “🌡️”)
+return table.get(condition, "🌡️")
 
 def format_local_time(time_str):
-“””‘2026-03-21T07:30’ → ‘3/21 07:30’ 형식으로 변환”””
+"""‘2026-03-21T07:30’ → ‘3/21 07:30’ 형식으로 변환"""
 if not time_str:
-return “”
+return ""
 try:
-dt = datetime.strptime(time_str, “%Y-%m-%dT%H:%M”)
-return f”{dt.month}/{dt.day} {dt.strftime(’%H:%M’)}”
+dt = datetime.strptime(time_str, "%Y-%m-%dT%H:%M")
+return f"{dt.month}/{dt.day} {dt.strftime(’%H:%M’)}"
 except ValueError:
 return time_str
 
 def generate_weather_card(w, idx):
-“”“단일 도시의 날씨 카드 HTML 생성 (idx: 도시 인덱스, 실시간 업데이트용 id)”””
-if “error” in w:
-return f”””
+"""단일 도시의 날씨 카드 HTML 생성 (idx: 도시 인덱스, 실시간 업데이트용 id)"""
+if "error" in w:
+return f"""
 <div class="weather-city" id="weather-city-{idx}">
 <div class="weather-city-name">{w[‘city’]}</div>
 <div style="color:#718096">날씨 데이터를 불러올 수 없습니다</div>
-</div>”””
+</div>"""
 
 ```
 c  = w["current"]
@@ -83,7 +83,7 @@ return f"""
 ```
 
 def generate_html(brief):
-generated = brief.get(“generated_at”, “”)
+generated = brief.get("generated_at", "")
 
 ```
 # ── 날씨: 리스트(3도시) 또는 기존 단일 객체 호환 ──
@@ -471,9 +471,9 @@ tr:not(:last-child) td {{ border-bottom: 1px solid #f0f0f0; }}
 return html
 ```
 
-if **name** == “**main**”:
+if **name** == "**main**":
 brief = load_brief()
 html  = generate_html(brief)
-with open(“docs/index.html”, “w”, encoding=“utf-8”) as f:
+with open("docs/index.html", "w", encoding="utf-8") as f:
 f.write(html)
-print(“docs/index.html 생성 완료”)
+print("docs/index.html 생성 완료")
