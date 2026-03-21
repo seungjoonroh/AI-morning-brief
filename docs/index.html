@@ -24,6 +24,21 @@
     }
     .header h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
     .header .subtitle { font-size: 0.85rem; color: #a0aec0; }
+    .live-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      background: #48bb78;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
+      vertical-align: middle;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
 
     /* 카드 공통 */
     .card {
@@ -161,85 +176,89 @@
   <div class="container">
     <div class="header">
       <h1>📰 AI 모닝 브리핑</h1>
-      <div class="subtitle">2026-03-21 04:25 기준</div>
+      <div class="subtitle">
+        뉴스·주가 2026-03-21 22:42 기준 ·
+        날씨 <span id="weather-update-time">업데이트 중...</span>
+        <span class="live-badge" id="live-badge" style="display:none">LIVE</span>
+      </div>
     </div>
 
     <div class="card">
       <h2>🌤 날씨</h2>
       <div class="weather-grid">
         
-    <div class="weather-city">
+    <div class="weather-city" id="weather-city-0">
       <div class="weather-city-header">
         <div class="weather-city-name">서울</div>
-        <div class="weather-local-time">3/21 13:15</div>
+        <div class="weather-local-time" id="local-time-0">3/22 07:30</div>
       </div>
       <div class="weather-main">
-        <div class="weather-emoji">☀️</div>
+        <div class="weather-emoji" id="weather-emoji-0">🌤️</div>
         <div>
-          <div class="weather-temp">11.4°C</div>
-          <div class="weather-condition">맑음</div>
+          <div class="weather-temp" id="weather-temp-0">2.0°C</div>
+          <div class="weather-condition" id="weather-cond-0">구름 조금</div>
         </div>
       </div>
       <div class="weather-detail">
-        <span>💧 습도 44%</span>
-        <span>💨 바람 5.1 km/h</span>
-        <span>🌡 -1.4°~11.9°C</span>
+        <span>💧 습도 <span id="humidity-0">64</span>%</span>
+        <span>💨 바람 <span id="wind-0">2.9</span> km/h</span>
+        <span>🌡 1.7°~14.7°C</span>
         <span>☔ 강수 0.0mm</span>
       </div>
       
         <div class="weather-forecast">
           <span class="forecast-label">내일</span>
-          ☁️ 흐림 · 2.2°~14.8°C · 강수 0.0mm
+          🌤️ 구름 조금 · 3.0°~16.3°C · 강수 0.0mm
         </div>
     </div>
 
-    <div class="weather-city">
+    <div class="weather-city" id="weather-city-1">
       <div class="weather-city-header">
         <div class="weather-city-name">이타카</div>
-        <div class="weather-local-time">3/21 00:15</div>
+        <div class="weather-local-time" id="local-time-1">3/21 18:30</div>
       </div>
       <div class="weather-main">
-        <div class="weather-emoji">🌡️</div>
+        <div class="weather-emoji" id="weather-emoji-1">⛅</div>
         <div>
-          <div class="weather-temp">4.1°C</div>
-          <div class="weather-condition">기타(45)</div>
+          <div class="weather-temp" id="weather-temp-1">2.9°C</div>
+          <div class="weather-condition" id="weather-cond-1">구름 많음</div>
         </div>
       </div>
       <div class="weather-detail">
-        <span>💧 습도 98%</span>
-        <span>💨 바람 12.0 km/h</span>
-        <span>🌡 0.8°~4.5°C</span>
+        <span>💧 습도 <span id="humidity-1">80</span>%</span>
+        <span>💨 바람 <span id="wind-1">0.8</span> km/h</span>
+        <span>🌡 0.5°~4.1°C</span>
         <span>☔ 강수 0.0mm</span>
       </div>
       
         <div class="weather-forecast">
           <span class="forecast-label">내일</span>
-          🌧️ 비 · 1.3°~12.3°C · 강수 4.12mm
+          🌧️ 비 · 0.7°~15.8°C · 강수 19.17mm
         </div>
     </div>
 
-    <div class="weather-city">
+    <div class="weather-city" id="weather-city-2">
       <div class="weather-city-header">
         <div class="weather-city-name">파리</div>
-        <div class="weather-local-time">3/21 05:15</div>
+        <div class="weather-local-time" id="local-time-2">3/21 23:30</div>
       </div>
       <div class="weather-main">
-        <div class="weather-emoji">🌤️</div>
+        <div class="weather-emoji" id="weather-emoji-2">🌤️</div>
         <div>
-          <div class="weather-temp">7.6°C</div>
-          <div class="weather-condition">구름 조금</div>
+          <div class="weather-temp" id="weather-temp-2">9.6°C</div>
+          <div class="weather-condition" id="weather-cond-2">구름 조금</div>
         </div>
       </div>
       <div class="weather-detail">
-        <span>💧 습도 78%</span>
-        <span>💨 바람 7.6 km/h</span>
-        <span>🌡 6.5°~17.2°C</span>
+        <span>💧 습도 <span id="humidity-2">71</span>%</span>
+        <span>💨 바람 <span id="wind-2">8.6</span> km/h</span>
+        <span>🌡 6.6°~17.3°C</span>
         <span>☔ 강수 0.0mm</span>
       </div>
       
         <div class="weather-forecast">
           <span class="forecast-label">내일</span>
-          ☁️ 흐림 · 5.5°~16.4°C · 강수 0.0mm
+          ☁️ 흐림 · 5.6°~15.8°C · 강수 0.0mm
         </div>
     </div>
       </div>
@@ -291,32 +310,28 @@
       
         <div class="news-block">
           <h3># AI</h3>
-          <div class="summary">오늘의 AI 동향은 AI 역량 검증 체</div>
+          <div class="summary">오늘의 AI 동향은 AI 역량</div>
           <ul>
             <li>
               <a href="https://www.venturesquare.net/1060031/" target="_blank">KOSA·KT, AI 역량 검증 체계 구축 업무협약 체결</a>
               <span class="news-meta">Venturesquare.net · 2026-03-19</span>
             </li>
             <li>
-              <a href="https://www.venturesquare.net/1059522/" target="_blank">버즈니, ‘AI 바우처 지원사업’ 2년 연속 선정</a>
-              <span class="news-meta">Venturesquare.net · 2026-03-19</span>
+              <a href="https://www.venturesquare.net/1061599/" target="_blank">레드브릭, ISO/IEC 27001 인증 획득…엔터프라이즈 AI 보안 체계 강화</a>
+              <span class="news-meta">Venturesquare.net · 2026-03-20</span>
+            </li>
+            <li>
+              <a href="https://www.khan.co.kr/article/202603201420001" target="_blank">AI 일자리 추천으로 하루 57명 취업…월급도 더 많았다</a>
+              <span class="news-meta">Khan.co.kr · 2026-03-20</span>
             </li>
             <li>
               <a href="https://www.khan.co.kr/article/202603191657001" target="_blank">“AI, 노동 대체 아닌 협업 도구로”…노벨경제학 수상자의 ‘친노동자 AI’ 제안</a>
               <span class="news-meta">Khan.co.kr · 2026-03-19</span>
-            </li>
-            <li>
-              <a href="https://zdnet.co.kr/view/?no=20260319223547" target="_blank">[기고] AI 전쟁 시대, 합참 'AI 작전지원단' 지금 창설해야</a>
-              <span class="news-meta">Zdnet.co.kr · 2026-03-19</span>
-            </li>
-            <li>
-              <a href="https://zdnet.co.kr/view/?no=20260319162023" target="_blank">韓 AI 3사 총집결…오케스트로, 공공 AI 인프라 판 키운다</a>
-              <span class="news-meta">Zdnet.co.kr · 2026-03-19</span>
             </li></ul>
         </div>
         <div class="news-block">
           <h3># 반도체</h3>
-          <div class="summary">반도체 업계는 AI 기술을 공정</div>
+          <div class="summary">AI 기술이 반도체 공정에 적용</div>
           <ul>
             <li>
               <a href="https://www.venturesquare.net/1059503/" target="_blank">심플랫폼, DB하이텍과 협력 확대…반도체 공정 AI 적용 범위 확장</a>
@@ -335,13 +350,13 @@
               <span class="news-meta">Khan.co.kr · 2026-03-19</span>
             </li>
             <li>
-              <a href="https://zdnet.co.kr/view/?no=20260319164800" target="_blank">삼성전자, 올해 시설·R&D 투자에 110조원 이상 투입..."AI 주도권 확보"</a>
-              <span class="news-meta">Zdnet.co.kr · 2026-03-19</span>
+              <a href="https://zdnet.co.kr/view/?no=20260320160802" target="_blank">GTC 2026, AI 풀스택 전환 신호탄…산업 경계 무너진다</a>
+              <span class="news-meta">Zdnet.co.kr · 2026-03-20</span>
             </li></ul>
         </div>
         <div class="news-block">
           <h3># 코스피</h3>
-          <div class="summary">오늘 코스피는 환율 급등과 원화</div>
+          <div class="summary">오늘 코스피는 환율 급등과 고</div>
           <ul>
             <li>
               <a href="https://www.khan.co.kr/article/202603190902001" target="_blank">[속보]환율 21.9원 급등한 1505원 개장</a>
@@ -362,7 +377,118 @@
         </div>
     </div>
 
-    <div class="footer">AI Morning Brief · 매일 오전 7시 자동 업데이트</div>
+    <div class="footer">AI Morning Brief · 매일 오전 7시 자동 업데이트 · 날씨는 실시간</div>
   </div>
+
+  <script>
+  // ──────────────────────────────────────
+  // 실시간 날씨 업데이트
+  // 페이지를 열 때 Open-Meteo API를 브라우저에서 직접 호출
+  // 현재 기온, 날씨 상태, 습도, 바람, 현지 시간을 갱신
+  // 실패 시 아침 7시에 생성된 정적 데이터가 그대로 유지됨
+  // ──────────────────────────────────────
+
+  const CITIES = [
+    { city: "서울",   lat: 37.5665, lon: 126.9780, tz: "Asia/Seoul" },
+    { city: "이타카", lat: 42.4440, lon: -76.5019, tz: "America/New_York" },
+    { city: "파리",   lat: 48.8566, lon: 2.3522,   tz: "Europe/Paris" },
+  ];
+
+  // WMO 날씨 코드 → [한글 상태, 이모지]
+  function weatherInfo(code) {
+    const map = {
+      0: ["맑음", "☀️"],
+      1: ["구름 조금", "🌤️"], 2: ["구름 많음", "⛅"], 3: ["흐림", "☁️"],
+      51: ["비", "🌧️"], 53: ["비", "🌧️"], 55: ["비", "🌧️"],
+      61: ["비", "🌧️"], 63: ["비", "🌧️"], 65: ["비", "🌧️"],
+      71: ["눈", "❄️"], 73: ["눈", "❄️"], 75: ["눈", "❄️"],
+      80: ["소나기", "🌦️"], 81: ["소나기", "🌦️"], 82: ["소나기", "🌦️"],
+      95: ["천둥번개", "⛈️"], 96: ["천둥번개", "⛈️"], 99: ["천둥번개", "⛈️"],
+    };
+    return map[code] || ["기타", "🌡️"];
+  }
+
+  // 특정 타임존의 현재 시각을 "M/D HH:MM" 형식으로 반환
+  function getLocalTime(tz) {
+    const now = new Date();
+    const opts = { timeZone: tz, hour: "2-digit", minute: "2-digit", hour12: false };
+    const dateOpts = { timeZone: tz, month: "numeric", day: "numeric" };
+    const time = now.toLocaleTimeString("en-GB", opts);
+    const date = now.toLocaleDateString("en-US", dateOpts);
+    return date + " " + time;
+  }
+
+  // Open-Meteo API 호출 → 각 도시 날씨 DOM 업데이트
+  async function updateWeatherLive() {
+    for (let i = 0; i < CITIES.length; i++) {
+      const c = CITIES[i];
+      try {
+        const url =
+          "https://api.open-meteo.com/v1/forecast" +
+          "?latitude=" + c.lat +
+          "&longitude=" + c.lon +
+          "&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m" +
+          "&timezone=" + encodeURIComponent(c.tz);
+
+        const resp = await fetch(url);
+        const data = await resp.json();
+        const cur = data.current;
+
+        const [condText, condEmoji] = weatherInfo(cur.weather_code);
+
+        // 각 요소를 id로 찾아서 업데이트
+        const tempEl  = document.getElementById("weather-temp-" + i);
+        const condEl  = document.getElementById("weather-cond-" + i);
+        const emojiEl = document.getElementById("weather-emoji-" + i);
+        const timeEl  = document.getElementById("local-time-" + i);
+        const humidEl = document.getElementById("humidity-" + i);
+        const windEl  = document.getElementById("wind-" + i);
+
+        if (tempEl)  tempEl.textContent  = cur.temperature_2m + "°C";
+        if (condEl)  condEl.textContent  = condText;
+        if (emojiEl) emojiEl.textContent = condEmoji;
+        if (timeEl)  timeEl.textContent  = getLocalTime(c.tz);
+        if (humidEl) humidEl.textContent = cur.relative_humidity_2m;
+        if (windEl)  windEl.textContent  = cur.wind_speed_10m;
+
+      } catch (e) {
+        console.warn(c.city + " 실시간 날씨 업데이트 실패:", e);
+        // 실패 시 기존 정적 데이터 유지
+      }
+    }
+
+    // 현지 시간도 갱신
+    updateLocalTimes();
+
+    // 헤더에 마지막 업데이트 시각 표시 + LIVE 배지
+    const now = new Date();
+    const hh = String(now.getHours()).padStart(2, "0");
+    const mm = String(now.getMinutes()).padStart(2, "0");
+    const updateEl = document.getElementById("weather-update-time");
+    const badgeEl  = document.getElementById("live-badge");
+    if (updateEl) updateEl.textContent = hh + ":" + mm + " 실시간";
+    if (badgeEl)  badgeEl.style.display = "inline-block";
+  }
+
+  // 현지 시간만 매분 갱신 (API 호출 없이)
+  function updateLocalTimes() {
+    for (let i = 0; i < CITIES.length; i++) {
+      const timeEl = document.getElementById("local-time-" + i);
+      if (timeEl) {
+        timeEl.textContent = getLocalTime(CITIES[i].tz);
+      }
+    }
+  }
+
+  // ── 실행 ──
+  // 페이지 로드 시 즉시 실시간 데이터 가져오기
+  updateWeatherLive();
+
+  // 현지 시간: 1분마다 갱신
+  setInterval(updateLocalTimes, 60000);
+
+  // 날씨 데이터: 10분마다 갱신
+  setInterval(updateWeatherLive, 600000);
+  </script>
 </body>
 </html>
