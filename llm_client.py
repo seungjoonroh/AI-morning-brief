@@ -14,24 +14,26 @@ GEMINI_URL = (
 )
 ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
 
-
 def _call_gemini(prompt):
     url  = f"{GEMINI_URL}?key={GEMINI_API_KEY}"
     body = json.dumps({
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {"maxOutputTokens": 300, "temperature": 0.3},
-    }).encode()
+    }).encode("utf-8")
 
     req = urllib.request.Request(
         url, data=body,
-        headers={"Content-Type": "application/json"},
+        headers={"Content-Type": "application/json; charset=utf-8"},
         method="POST"
     )
-    with urllib.request.urlopen(req) as r:
-        data = json.loads(r.read().decode())
-
-    return data["candidates"][0]["content"]["parts"][0]["text"].strip()
-
+    try:
+        with urllib.request.urlopen(req) as r:
+            data = json.loads(r.read().decode())
+        return data["candidates"][0]["content"]["parts"][0]["text"].strip()
+    except urllib.error.HTTPError as e:
+        error_body = e.read().decode("utf-8")
+        print(f"Gemini 오류 상세: {error_body}")
+        return f"요약 실패: {e}"
 
 def _call_claude(prompt):
     body = json.dumps({
