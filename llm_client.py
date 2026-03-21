@@ -10,20 +10,21 @@ ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 
 GEMINI_URL = (
     "https://generativelanguage.googleapis.com/v1beta"
-    "/models/gemini-1.5-flash-latest:generateContent"
+    "/models/gemini-2.0-flash:generateContent"
 )
 ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
-
 def _call_gemini(prompt):
-    url  = f"{GEMINI_URL}?key={GEMINI_API_KEY}"
     body = json.dumps({
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {"maxOutputTokens": 300, "temperature": 0.3},
     }).encode("utf-8")
 
     req = urllib.request.Request(
-        url, data=body,
-        headers={"Content-Type": "application/json; charset=utf-8"},
+        GEMINI_URL, data=body,
+        headers={
+            "Content-Type":  "application/json; charset=utf-8",
+            "x-goog-api-key": GEMINI_API_KEY,   # 헤더로 전달 (쿼리 파라미터 제거)
+        },
         method="POST"
     )
     try:
@@ -34,7 +35,7 @@ def _call_gemini(prompt):
         error_body = e.read().decode("utf-8")
         print(f"Gemini 오류 상세: {error_body}")
         return f"요약 실패: {e}"
-
+        
 def _call_claude(prompt):
     body = json.dumps({
         "model":      "claude-haiku-4-5-20251001",
