@@ -4,11 +4,9 @@ import json
 from datetime import datetime, timedelta
 import os
 import yfinance as yf
+from llm_client import summarize_news
 
-# ============================================================
-# 설정
-# ============================================================
-NEWS_API_KEY = os.environ.get("NEWS_API_KEY")
+NEWS_API_KEY  = os.environ.get("NEWS_API_KEY")
 NEWS_BASE_URL = "https://newsapi.org/v2/everything"
 
 WEATHER_LATITUDE  = 37.5665
@@ -34,13 +32,13 @@ STOCK_SYMBOLS = [
 # 날씨
 # ============================================================
 def interpret_weather_code(code):
-    if code == 0:                  return "맑음"
-    elif code in (1, 2, 3):        return "구름 조금" if code == 1 else ("구름 많음" if code == 2 else "흐림")
-    elif code in range(51, 68):    return "비"
-    elif code in range(71, 78):    return "눈"
-    elif code in range(80, 83):    return "소나기"
-    elif code in range(95, 100):   return "천둥번개"
-    else:                          return f"기타({code})"
+    if code == 0:                return "맑음"
+    elif code in (1, 2, 3):      return "구름 조금" if code == 1 else ("구름 많음" if code == 2 else "흐림")
+    elif code in range(51, 68):  return "비"
+    elif code in range(71, 78):  return "눈"
+    elif code in range(80, 83):  return "소나기"
+    elif code in range(95, 100): return "천둥번개"
+    else:                        return f"기타({code})"
 
 def fetch_weather():
     url = (
@@ -52,7 +50,6 @@ def fetch_weather():
     )
     with urllib.request.urlopen(url) as r:
         data = json.loads(r.read().decode())
-
     current = data["current"]
     daily   = data["daily"]
     return {
@@ -127,7 +124,10 @@ def fetch_news():
     result = {}
     for kw in INTEREST_KEYWORDS:
         label, articles = fetch_news_by_keyword(kw)
-        result[label] = articles
+        print(f"  [{label}] {len(articles)}건 수집 → 요약 중...")
+        summary = summarize_news(label, articles)
+        result[label] = {"articles": articles, "summary": summary}
+        print(f"    요약: {summary[:60]}...")
     return result
 
 # ============================================================
@@ -137,15 +137,13 @@ def fetch_stock(label, ticker):
     hist = yf.Ticker(ticker).history(period="2d")
     if hist.empty:
         return {"label": label, "ticker": ticker, "error": "데이터 없음"}
-
     price = round(hist.iloc[-1]["Close"], 2)
     if len(hist) >= 2:
-        prev      = hist.iloc[-2]["Close"]
-        change    = round(price - prev, 2)
+        prev       = hist.iloc[-2]["Close"]
+        change     = round(price - prev, 2)
         change_pct = round((change / prev) * 100, 2)
     else:
         change = change_pct = 0
-
     sign = "+" if change >= 0 else ""
     return {
         "label":      label,
@@ -160,58 +158,20 @@ def fetch_stocks():
     return [fetch_stock(s["label"], s["ticker"]) for s in STOCK_SYMBOLS]
 
 # ============================================================
-# 출력
-# ============================================================
-def print_brief(brief):
-    now = brief["generated_at"]
-    w   = brief["weather"]
-    c   = w["current"]
-    t   = w["today"]
-
-    print("\n" + "=" * 50)
-    print(f"  AI 모닝 브리핑  |  {now}")
-    print("=" * 50)
-
-    print(f"\n[ 날씨 — {w['city']} ]")
-    print(f"  현재  {c['temperature']}°C  {c['condition']}  습도 {c['humidity']}%  바람 {c['wind_speed']} km/h")
-    print(f"  오늘  최고 {t['temp_max']}°C / 최저 {t['temp_min']}°C  강수 {t['precipitation']} mm")
-
-    print(f"\n[ 주가 ]")
-    for s in brief["stocks"]:
-        if "error" in s:
-            print(f"  {s['label']:10}  오류")
-        else:
-            print(f"  {s['label']:10}  {s['price']:>12,.2f}  {s['display']}")
-
-    print(f"\n[ 뉴스 클리핑 ]")
-    for label, articles in brief["news"].items():
-        print(f"\n  # {label}")
-        if not articles:
-            print("    관련 기사 없음")
-        for i, a in enumerate(articles, 1):
-            print(f"    {i}. {a['title']}")
-            print(f"       {a['source']} | {a['published_at']}")
-
-    print("\n" + "=" * 50)
-
-# ============================================================
 # 메인
 # ============================================================
 if __name__ == "__main__":
     if not NEWS_API_KEY:
-        print("오류: NEWS_API_KEY 환경변수가 없습니다.")
+        print("오류: NEWS_API_KEY 없음")
         exit(1)
 
     print("데이터 수집 중...")
-
     brief = {
         "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
-        "weather": fetch_weather(),
-        "stocks":  fetch_stocks(),
-        "news":    fetch_news(),
+        "weather":  fetch_weather(),
+        "stocks":   fetch_stocks(),
+        "news":     fetch_news(),
     }
-
-    print_brief(brief)
 
     with open("brief_result.json", "w", encoding="utf-8") as f:
         json.dump(brief, f, ensure_ascii=False, indent=2)
