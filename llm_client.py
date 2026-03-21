@@ -10,7 +10,7 @@ ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 
 GEMINI_URL = (
     "https://generativelanguage.googleapis.com/v1beta"
-    "/models/gemini-2.0-flash:generateContent"
+    "/models/gemini-2.5-flash:generateContent"
 )
 ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
 def _call_gemini(prompt):
